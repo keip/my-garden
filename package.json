@@ -1,0 +1,28 @@
+{
+  "private": true,
+  "type": "module",
+  "name": "my-garden",
+  "version": "1.0.0",
+  "description": "React web application that allows users to create and manage their own virtual garden.",
+  "scripts": {
+    "eslint": "eslint ./",
+    "start:app": "yarn workspace @my-garden/app start",
+    "start:api": "yarn workspace @my-garden/api start",
+    "ts": "tsc --project ./"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.12.12",
+    "@typescript-eslint/eslint-plugin": "^7.10.0",
+    "eslint": "^9.3.0",
+    "eslint-config-prettier": "^9.1.0",
+    "prettier": "^3.2.5",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  },
+  "author": "Jan Czibula",
+  "license": "ISC",
+  "workspaces": [
+    "packages/*"
+  ]
+}

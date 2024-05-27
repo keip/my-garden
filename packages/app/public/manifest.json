@@ -1,0 +1,6 @@
+{
+    "short_name": "MyGarden",
+    "name": "My Garden App",
+    "background_color": "#24242d",
+    "description": "React web application that allows users to create and manage their own virtual garden."
+  }
