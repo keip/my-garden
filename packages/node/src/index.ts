@@ -45,7 +45,6 @@ app.get("/plants", (req, res) => {
 // Add plant
 app.post("/plants", (req, res) => {
    try {
-    console.log(req.body)
     const plant: Plant = req.body.plant;
     const plants: Plant[] | undefined = cache.get(plantsCacheId)
 
