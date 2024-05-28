@@ -10,7 +10,7 @@ import waterPlant from "../reducers/plants/actions/water.ts";
 import CardActions from "@mui/material/CardActions";
 import GrassIcon from '@mui/icons-material/Grass';
 import ParkIcon from '@mui/icons-material/Park';
-import YardIcon from '@mui/icons-material/Yard';
+import LocalFloristIcon from '@mui/icons-material/LocalFlorist';
 import LinearProgress from "@mui/material/LinearProgress";
 
 interface PlantProps {
@@ -33,7 +33,7 @@ const Plant = (props: PlantProps) => {
                     <Grid item xs={12} textAlign="center">
                         {plant.type === 'grass' && <GrassIcon color="primary" style={{ fontSize: plantSize, transition: 'font-size 0.5s' }} />}
                         {plant.type === 'tree' && <ParkIcon color="primary" style={{ fontSize: plantSize, transition: 'font-size 0.5s' }} />}
-                        {plant.type === 'flower' && <YardIcon color="primary" style={{ fontSize: plantSize, transition: 'font-size 0.5s' }} />}
+                        {plant.type === 'flower' && <LocalFloristIcon color="primary" style={{ fontSize: plantSize, transition: 'font-size 0.5s' }} />}
                     </Grid>
                     {plant.size < 10 && (
                         <Grid item xs={12}>
