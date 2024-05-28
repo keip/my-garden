@@ -11,6 +11,7 @@ import CardActions from "@mui/material/CardActions";
 import GrassIcon from '@mui/icons-material/Grass';
 import ParkIcon from '@mui/icons-material/Park';
 import YardIcon from '@mui/icons-material/Yard';
+import LinearProgress from "@mui/material/LinearProgress";
 
 interface PlantProps {
     plantId: number;
@@ -20,6 +21,7 @@ interface PlantProps {
 const Plant = (props: PlantProps) => {
     const dispatch = useDispatch();
     const plant = props.plant;
+    const plantSize = 24 + 12 * plant.size;
 
     return (
         <Card variant="outlined">
@@ -29,19 +31,31 @@ const Plant = (props: PlantProps) => {
                         <Typography textAlign="center">{props.plant.name}</Typography>
                     </Grid>
                     <Grid item xs={12} textAlign="center">
-                        {plant.type === 'grass' && <GrassIcon color="primary" style={{ fontSize: 12 * plant.size, transition: 'font-size 0.5s' }} />}
-                        {plant.type === 'tree' && <ParkIcon color="primary" style={{ fontSize: 12 * plant.size, transition: 'font-size 0.5s' }} />}
-                        {plant.type === 'flower' && <YardIcon color="primary" style={{ fontSize: 12 * plant.size, transition: 'font-size 0.5s' }} />}
+                        {plant.type === 'grass' && <GrassIcon color="primary" style={{ fontSize: plantSize, transition: 'font-size 0.5s' }} />}
+                        {plant.type === 'tree' && <ParkIcon color="primary" style={{ fontSize: plantSize, transition: 'font-size 0.5s' }} />}
+                        {plant.type === 'flower' && <YardIcon color="primary" style={{ fontSize: plantSize, transition: 'font-size 0.5s' }} />}
                     </Grid>
+                    {plant.size < 10 && (
+                        <Grid item xs={12}>
+                            <LinearProgress variant="determinate" value={plant.size * 10} />
+                        </Grid>
+                    )}
+                    {plant.size === 10 && (
+                        <Grid item xs={12} textAlign="center">
+                            <Typography textAlign="center" variant="body2">Plant fully grown</Typography>
+                        </Grid>
+                    )}
                 </Grid>
             </CardContent>
-            <CardActions>
-                <Button fullWidth size="small" variant="outlined" onClick={() => {
-                    dispatch(waterPlant(props.plantId))
-                }}>
-                    Water plant
-                </Button>
-            </CardActions>
+            {plant.size < 10 && (
+                <CardActions>
+                        <Button fullWidth size="small" variant="outlined" onClick={() => {
+                            dispatch(waterPlant(props.plantId))
+                        }}>
+                            Water plant
+                        </Button>
+                </CardActions>
+            )}
         </Card>
     )
 };
