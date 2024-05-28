@@ -8,7 +8,7 @@ interface PlantProps {
 
 const Plant = (props: PlantProps) => {
     return (
-        <Grid item md={3}>{props.plant.name}</Grid>
+        <Grid item md={4} xs={12}>{props.plant.name}</Grid>
     )
 }
 

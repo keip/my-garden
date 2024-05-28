@@ -1,6 +1,7 @@
 import express from "express";
 import NodeCache from "node-cache";
 import bodyParser from "body-parser";
+import cors from 'cors';
 
 // Define types
 type Plant = {
@@ -12,14 +13,18 @@ type Plant = {
 // Create express app
 const app = express();
 
+// Set CORS policy
+app.use(cors());
+
+// Express app to support JSON-encoded bodies
+app.use(bodyParser.json());
+
 // Create node cache
-const cache = new NodeCache({ stdTTL: 15 });
+const cache = new NodeCache();
 
 // Define cache indexes
 const plantsCacheId = 'plants';
 
-// Express app to support JSON-encoded bodies
-app.use(bodyParser.json());
 
 // Get all plants
 app.get("/plants", (req, res) => {

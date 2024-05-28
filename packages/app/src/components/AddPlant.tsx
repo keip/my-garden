@@ -12,8 +12,12 @@ import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import AddIcon from '@mui/icons-material/AddCircle';
+import { useDispatch } from "react-redux";
+import { Plant } from "../types";
+import addPlant from "../reducers/plants/actions/add.ts";
 
 const AddPlant = () => {
+    const dispatch = useDispatch();
     const [openDialog, setOpenDialog] = useState(false);
 
     return (
@@ -30,7 +34,12 @@ const AddPlant = () => {
                         event.preventDefault();
                         const formData = new FormData(event.currentTarget);
                         const formJson = Object.fromEntries((formData as any).entries());
-                        console.log(formJson);
+                        const newPlant: Plant = {
+                            name: formJson.name,
+                            type: formJson.type,
+                            size: 1,
+                        }
+                        dispatch(addPlant(newPlant));
                         setOpenDialog(false)
                     },
                 }}
@@ -38,10 +47,10 @@ const AddPlant = () => {
                 <DialogTitle>Add new plant</DialogTitle>
                 <DialogContent>
                     <Grid container spacing={3}>
-                        <Grid item md={12}>
+                        <Grid item xs={12}>
                             <Typography color="secondary">Name your new plant and select it's type.</Typography>
                         </Grid>
-                        <Grid item md={12}>
+                        <Grid item xs={12}>
                             <TextField
                                 autoFocus
                                 required
@@ -50,7 +59,7 @@ const AddPlant = () => {
                                 fullWidth
                             />
                         </Grid>
-                        <Grid item md={12}>
+                        <Grid item xs={12}>
                             <FormControl fullWidth>
                                 <InputLabel id="plant-type">Plant type</InputLabel>
                                 <Select
@@ -65,7 +74,7 @@ const AddPlant = () => {
                                 </Select>
                             </FormControl>
                         </Grid>
-                        <Grid item md={12}>
+                        <Grid item xs={12}>
                             <Grid container justifyContent="space-between">
                                 <Grid item>
                                     <Button variant="outlined" onClick={() => setOpenDialog(false)} color="secondary">Cancel</Button>
