@@ -1,5 +1,6 @@
 # My garden
-React web application that allows users to create and manage their own virtual garden.
+
+Application built with Typescript, Express and React, that allows users to create and manage their own virtual garden.
 
 ![alt text](https://raw.githubusercontent.com/keip/my-garden/main/assets/app-screenshot.png)
 
@@ -16,3 +17,5 @@ Start api:
 Start React App:
 
 `yarn workspace @my-garden/app start`
+
+Grow your Garden!

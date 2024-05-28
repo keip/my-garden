@@ -5,10 +5,8 @@
   "version": "1.0.0",
   "description": "React web application that allows users to create and manage their own virtual garden.",
   "scripts": {
-    "eslint": "eslint ./ --fix",
     "start:app": "yarn workspace @my-garden/app start",
-    "start:api": "yarn workspace @my-garden/api start",
-    "ts": "tsc --project ./"
+    "start:api": "yarn workspace @my-garden/api start"
   },
   "devDependencies": {
     "@eslint/compat": "^1.0.1",
