@@ -11,6 +11,7 @@ import CardActions from "@mui/material/CardActions";
 import GrassIcon from '@mui/icons-material/Grass';
 import ParkIcon from '@mui/icons-material/Park';
 import LocalFloristIcon from '@mui/icons-material/LocalFlorist';
+import CircleIcon from '@mui/icons-material/Circle';
 import LinearProgress from "@mui/material/LinearProgress";
 
 interface PlantProps {
@@ -31,18 +32,24 @@ const Plant = (props: PlantProps) => {
                         <Typography textAlign="center">{props.plant.name}</Typography>
                     </Grid>
                     <Grid item xs={12} textAlign="center">
-                        {plant.type === 'grass' && <GrassIcon color="primary" style={{ fontSize: plantSize, transition: 'font-size 0.5s' }} />}
-                        {plant.type === 'tree' && <ParkIcon color="primary" style={{ fontSize: plantSize, transition: 'font-size 0.5s' }} />}
-                        {plant.type === 'flower' && <LocalFloristIcon color="primary" style={{ fontSize: plantSize, transition: 'font-size 0.5s' }} />}
+                        {plant.size === 1 && <CircleIcon color="primary" />}
+                        {plant.size > 1 && plant.type === 'grass' && <GrassIcon color="primary" style={{ fontSize: plantSize, transition: 'font-size 0.5s' }} />}
+                        {plant.size > 1 && plant.type === 'tree' && <ParkIcon color="primary" style={{ fontSize: plantSize, transition: 'font-size 0.5s' }} />}
+                        {plant.size > 1 && plant.type === 'flower' && <LocalFloristIcon color="primary" style={{ fontSize: plantSize, transition: 'font-size 0.5s' }} />}
                     </Grid>
-                    {plant.size < 10 && (
+                    {plant.size === 1 && (
+                        <Grid item xs={12} textAlign="center">
+                            <Typography variant="body2">Seed planted</Typography>
+                        </Grid>
+                    )}
+                    {plant.size > 1 && plant.size < 10 && (
                         <Grid item xs={12}>
                             <LinearProgress variant="determinate" value={plant.size * 10} />
                         </Grid>
                     )}
                     {plant.size === 10 && (
                         <Grid item xs={12} textAlign="center">
-                            <Typography textAlign="center" variant="body2">Plant fully grown</Typography>
+                            <Typography variant="body2">Plant fully grown</Typography>
                         </Grid>
                     )}
                 </Grid>
