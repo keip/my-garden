@@ -1,13 +1,13 @@
 import express from "express";
 import NodeCache from "node-cache";
 import bodyParser from "body-parser";
-import cors from 'cors';
+import cors from "cors";
 
 // Define types
 type Plant = {
-  name: string,
-  type: 'grass' | 'tree' | 'flower',
-  size: number,
+  name: string;
+  type: "grass" | "tree" | "flower";
+  size: number;
 };
 
 // Create express app
@@ -23,35 +23,34 @@ app.use(bodyParser.json());
 const cache = new NodeCache();
 
 // Define cache indexes
-const plantsCacheId = 'plants';
-
+const plantsCacheId = "plants";
 
 // Get all plants
 app.get("/plants", (req, res) => {
-   try {
+  try {
     // get and return plants from cache
     const plants = cache.get(plantsCacheId);
 
     // check if plants array exists
     if (plants) {
       return res.status(200).json({
-          plants,
-      }) 
+        plants,
+      });
     } else {
       // plants cache not found
-      return res.status(404).send('Plants not found');
+      return res.status(404).send("Plants not found");
     }
-   } catch (err) {
+  } catch (err) {
     console.error(err);
     process.exit();
-   } 
+  }
 });
 
 // Add plant
 app.post("/plants", (req, res) => {
-   try {
+  try {
     const plant: Plant = req.body.plant;
-    const plants: Plant[] | undefined = cache.get(plantsCacheId)
+    const plants: Plant[] | undefined = cache.get(plantsCacheId);
 
     // Check if plants array exists
     if (plants) {
@@ -63,21 +62,21 @@ app.post("/plants", (req, res) => {
 
       // Return new plants
       return res.status(200).json({
-          plants,
+        plants,
       });
     } else {
       // Plants cache not found
-      return res.status(404).send('Plants not found');
+      return res.status(404).send("Plants not found");
     }
-   } catch (err) {
+  } catch (err) {
     console.error(err);
     process.exit();
-   } 
+  }
 });
 
 // Water plant by id
 app.put("/plants/:id/water", (req, res) => {
-   try {
+  try {
     const plantId = parseInt(req.params.id);
     const plants: Plant[] | undefined = cache.get(plantsCacheId);
 
@@ -91,8 +90,8 @@ app.put("/plants/:id/water", (req, res) => {
         // Increase plant size
         const newPlant = {
           ...plant,
-          size: plant.size + 1
-        }
+          size: plant.size + 1,
+        };
 
         // Replace old plant
         plants[plantId] = newPlant;
@@ -102,20 +101,20 @@ app.put("/plants/:id/water", (req, res) => {
 
         // Return new plants
         return res.status(200).json({
-          plants
-        })
+          plants,
+        });
       } else {
         // Plant not found
-        return res.status(404).send('Plant not found');
+        return res.status(404).send("Plant not found");
       }
     } else {
       // Plants cache not found
-      return res.status(404).send('Plants not found');
+      return res.status(404).send("Plants not found");
     }
-   } catch (err) {
+  } catch (err) {
     console.error(err);
     process.exit();
-   } 
+  }
 });
 
 // Start express app

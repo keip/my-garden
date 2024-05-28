@@ -1,12 +1,14 @@
-import { Plant } from '../../types'
-import { ADD_PLANT, GET_PLANTS, PlantActionTypes, WATER_PLANT } from './constants/index.ts';
+import { Plant } from "../../types";
+import {
+  ADD_PLANT,
+  GET_PLANTS,
+  PlantActionTypes,
+  WATER_PLANT,
+} from "./constants/index.ts";
 
 const initialState: Plant[] = [];
 
-const plantsReducer = (
-  state = initialState,
-  action: PlantActionTypes,
-) => {
+const plantsReducer = (state = initialState, action: PlantActionTypes) => {
   switch (action.type) {
     case GET_PLANTS:
       return action.payload;

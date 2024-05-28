@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import { createRoot } from "react-dom/client";
 import Container from "@mui/material/Container";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
@@ -6,8 +6,8 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
 import reducers from "./reducers/index.ts";
-import Garden from './components/Garden.tsx';
-import Box from '@mui/material/Box';
+import Garden from "./components/Garden.tsx";
+import Box from "@mui/material/Box";
 
 const darkTheme = createTheme({
   palette: {
@@ -15,15 +15,15 @@ const darkTheme = createTheme({
     primary: {
       main: "#76885B",
       dark: "#627254",
-      contrastText: "#fff"
+      contrastText: "#fff",
     },
     secondary: {
-      main: "#bbb"
-    }
+      main: "#bbb",
+    },
   },
   shape: {
-    borderRadius: 16
-  }
+    borderRadius: 16,
+  },
 });
 
 const store = configureStore({

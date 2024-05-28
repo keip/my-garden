@@ -5,22 +5,22 @@
   "version": "1.0.0",
   "description": "React web application that allows users to create and manage their own virtual garden.",
   "scripts": {
-    "eslint": "eslint ./",
+    "eslint": "eslint ./ --fix",
     "start:app": "yarn workspace @my-garden/app start",
     "start:api": "yarn workspace @my-garden/api start",
     "ts": "tsc --project ./"
   },
   "devDependencies": {
+    "@eslint/compat": "^1.0.1",
     "@types/express": "^4.17.21",
     "@types/node": "^20.12.12",
-    "@typescript-eslint/eslint-plugin": "^7.10.0",
-    "@typescript-eslint/typescript-estree": "^7.10.0",
-    "eslint": "^9.3.0",
-    "eslint-config-prettier": "^9.1.0",
-    "prettier": "^3.2.5",
+    "@typescript-eslint/parser": "^5.0.1",
+    "eslint": "^8.52.0",
+    "prettier": "^3.1.0",
+    "prettier-eslint": "^16.1.2",
     "react-scripts": "^5.0.1",
     "ts-node": "^10.9.2",
-    "typescript": "^5.4.5"
+    "typescript": "^4.4.4"
   },
   "author": "Jan Czibula",
   "license": "ISC",
