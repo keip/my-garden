@@ -33,9 +33,7 @@ app.get("/plants", (req, res) => {
 
     // check if plants array exists
     if (plants) {
-      return res.status(200).json({
-        plants,
-      });
+      return res.status(200).json(plants);
     } else {
       // plants cache not found
       return res.status(404).send("Plants not found");
@@ -62,7 +60,7 @@ app.post("/plants", (req, res) => {
 
       // Return new plants
       return res.status(200).json({
-        plants,
+        success: true,
       });
     } else {
       // Plants cache not found
@@ -101,7 +99,7 @@ app.put("/plants/:id/water", (req, res) => {
 
         // Return new plants
         return res.status(200).json({
-          plants,
+          success: true,
         });
       } else {
         // Plant not found

@@ -12,13 +12,24 @@ import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import AddIcon from "@mui/icons-material/AddCircle";
-import { useDispatch } from "react-redux";
 import { Plant } from "../types";
-import addPlant from "../reducers/plants/actions/add.ts";
+import { useAddPlant } from "../services/mutations.ts";
+import { useForm, SubmitHandler } from "react-hook-form";
 
 const AddPlant = () => {
-  const dispatch = useDispatch();
   const [openDialog, setOpenDialog] = useState(false);
+
+  const addPlantMutation = useAddPlant();
+
+  const { register, handleSubmit } = useForm<Plant>();
+
+  const handleAddPlantSubmit: SubmitHandler<Plant> = (data) => {
+    addPlantMutation.mutate({
+      ...data,
+      size: 1,
+    });
+    setOpenDialog(false);
+  };
 
   return (
     <Box textAlign="center" my={2}>
@@ -37,18 +48,7 @@ const AddPlant = () => {
         onClose={() => setOpenDialog(false)}
         PaperProps={{
           component: "form",
-          onSubmit: (event: React.FormEvent<HTMLFormElement>) => {
-            event.preventDefault();
-            const formData = new FormData(event.currentTarget);
-            const formJson = Object.fromEntries((formData as any).entries());
-            const newPlant: Plant = {
-              name: formJson.name,
-              type: formJson.type,
-              size: 1,
-            };
-            dispatch(addPlant(newPlant));
-            setOpenDialog(false);
-          },
+          onSubmit: handleSubmit(handleAddPlantSubmit),
         }}
       >
         <DialogTitle>Add new plant</DialogTitle>
@@ -63,9 +63,11 @@ const AddPlant = () => {
               <TextField
                 autoFocus
                 required
-                name="name"
                 label="Plant name"
                 fullWidth
+                InputProps={{
+                  ...register("name"),
+                }}
               />
             </Grid>
             <Grid item xs={12}>
@@ -73,9 +75,11 @@ const AddPlant = () => {
                 <InputLabel id="plant-type">Plant type</InputLabel>
                 <Select
                   labelId="plant-type"
-                  name="type"
                   label="Plant type"
                   defaultValue="grass"
+                  inputProps={{
+                    ...register("type"),
+                  }}
                 >
                   <MenuItem value="grass">Grass</MenuItem>
                   <MenuItem value="tree">Tree</MenuItem>

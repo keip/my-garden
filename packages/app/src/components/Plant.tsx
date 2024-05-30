@@ -5,14 +5,13 @@ import CardContent from "@mui/material/CardContent";
 import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
-import { useDispatch } from "react-redux";
-import waterPlant from "../reducers/plants/actions/water.ts";
 import CardActions from "@mui/material/CardActions";
 import GrassIcon from "@mui/icons-material/Grass";
 import ParkIcon from "@mui/icons-material/Park";
 import LocalFloristIcon from "@mui/icons-material/LocalFlorist";
 import CircleIcon from "@mui/icons-material/Circle";
 import LinearProgress from "@mui/material/LinearProgress";
+import { useWaterPlant } from "../services/mutations.ts";
 
 interface PlantProps {
   plantId: number;
@@ -20,9 +19,9 @@ interface PlantProps {
 }
 
 const Plant = (props: PlantProps) => {
-  const dispatch = useDispatch();
   const plant = props.plant;
   const plantSize = 24 + 12 * plant.size;
+  const useWaterPlantMutation = useWaterPlant();
 
   return (
     <Card variant="outlined">
@@ -76,7 +75,7 @@ const Plant = (props: PlantProps) => {
             size="small"
             variant="outlined"
             onClick={() => {
-              dispatch(waterPlant(props.plantId));
+              useWaterPlantMutation.mutate(props.plantId);
             }}
           >
             Water plant

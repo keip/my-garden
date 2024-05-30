@@ -3,11 +3,10 @@ import { createRoot } from "react-dom/client";
 import Container from "@mui/material/Container";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
-import { configureStore } from "@reduxjs/toolkit";
-import { Provider } from "react-redux";
-import reducers from "./reducers/index.ts";
 import Garden from "./components/Garden.tsx";
 import Box from "@mui/material/Box";
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const darkTheme = createTheme({
   palette: {
@@ -26,13 +25,11 @@ const darkTheme = createTheme({
   },
 });
 
-const store = configureStore({
-  reducer: reducers,
-});
+const queryClient = new QueryClient({});
 
 const App = () => {
   return (
-    <Provider store={store}>
+    <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={darkTheme}>
         <CssBaseline />
         <Container>
@@ -40,8 +37,9 @@ const App = () => {
             <Garden />
           </Box>
         </Container>
+        <ReactQueryDevtools initialIsOpen={false} />
       </ThemeProvider>
-    </Provider>
+    </QueryClientProvider>
   );
 };
 
