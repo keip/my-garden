@@ -12,7 +12,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import AddIcon from "@mui/icons-material/AddCircle";
-import { Plant } from "../types";
+import { Plant } from "../types/plant.ts";
 import { useAddPlant } from "../services/mutations.ts";
 import { useForm, SubmitHandler } from "react-hook-form";
 

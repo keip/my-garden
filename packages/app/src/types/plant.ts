@@ -3,7 +3,3 @@ export type Plant = {
   type: "grass" | "tree" | "flower";
   size: number;
 };
-
-export interface RootState {
-  plants: Plant[];
-}

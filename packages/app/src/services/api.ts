@@ -1,7 +1,7 @@
 import axios from "axios";
-import { Plant } from "../types";
+import { Plant } from "../types/plant";
 
-const BASE_URL = "http://localhost:3333";
+const BASE_URL = "http://localhost:8080";
 const axiosInstance = axios.create({ baseURL: BASE_URL });
 
 export const getPlants = async () => {

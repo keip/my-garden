@@ -3,6 +3,9 @@ import NodeCache from "node-cache";
 import bodyParser from "body-parser";
 import cors from "cors";
 
+// Define port
+const port = process.env.API_PORT || 8080;
+
 // Define types
 type Plant = {
   name: string;
@@ -116,7 +119,7 @@ app.put("/plants/:id/water", (req, res) => {
 });
 
 // Start express app
-const start = (port: number) => {
+const start = (port: string | number) => {
   try {
     app.listen(port);
     // Create plants cache
@@ -126,4 +129,4 @@ const start = (port: number) => {
     process.exit();
   }
 };
-start(3333);
+start(port);
